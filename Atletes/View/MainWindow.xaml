@@ -5,29 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Atletes"
         mc:Ignorable="d"
-        Title="Окно Входа" Height="450" Width="800" MaxHeight="450" MaxWidth="950" MinHeight="450" MinWidth="800">
+        Title="Главная страница" Height="450" Width="800" ResizeMode="NoResize">
 
-    <Grid Background="LightBlue">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="1"/>
+                <GradientStop Color="White"/>
+                <GradientStop Color="#FFA0D9E8" Offset="0.8"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="30*"/>
         </Grid.ColumnDefinitions>
 
-
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-
-            <Label Content="Нажмите на кнопку для входа" FontSize="50"/>
-            <Button Width="200" Height="60" Background="LightCyan" Content="Кнопка" FontSize="25" />
-
+            <Button Width="150" Height="50" RenderTransformOrigin="0.5,0.5" Click="AddAthleteAndTraining">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF4A4A98" Offset="0.44"/>
+                        <GradientStop Color="#FF645FA5"/>
+                        <GradientStop Color="#FF645FA5"/>
+                        <GradientStop Color="#FF494679" Offset="0.943"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-24.25"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-11.262"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Button.Content>
+                    <TextBlock TextWrapping="Wrap" Text="Добавление спортсменов/тренировок" FontSize="11"/>
+                </Button.Content>
+            </Button>
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
-
-            <Label Content="На эту)" FontSize="25"/>
-            <Button Width="80" Height="80" Background="LightCyan" Content="Кнопка" FontSize="20"/>
-
+        <StackPanel Grid.Column="1">
+            <ListView ItemsSource="{Binding Athletes}" SelectedItem="{Binding SelectedTraining}" Height="410">
+                <ListView.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="1"/>
+                        <GradientStop Color="White"/>
+                        <GradientStop Color="#FFA0D9E8" Offset="0.8"/>
+                    </LinearGradientBrush>
+                </ListView.Background>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}"/>
+                        <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}"/>
+                        <GridViewColumn Header="Дата рождения" DisplayMemberBinding="{Binding Birthday}"/>
+                        <GridViewColumn Header="Категория" DisplayMemberBinding="{Binding Category.Title}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
+
 
     </Grid>
+
 </Window>
 

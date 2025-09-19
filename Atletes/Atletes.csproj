@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Model\" />
     <Folder Include="VMTools\" />
     <Folder Include="VM\" />
   </ItemGroup>
