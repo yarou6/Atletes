@@ -1,7 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Atletes.Model;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,62 +13,48 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Atletes.Model;
 
 namespace Atletes.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для AddTraining.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class AddTraining : Window, INotifyPropertyChanged
     {
         _1135AlexandroDobruchoContext db;
 
+        private Model.Type selectedtype;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         void Signal([CallerMemberName] string prop = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-
-        private Training selectedtraining;
-        public List<Athlete> Athletes { get; set; }
-        public List<Category> Categories { get; set; }
-
-
-        public MainWindow()
+        public AddTraining()
         {
             InitializeComponent();
+
             DataContext = this;
 
             db = new _1135AlexandroDobruchoContext();
 
-            Athletes = db.Athletes.ToList();
-            Categories = db.Categories.ToList();
+            Types = db.Types.ToList();
+
 
         }
-        public List<Training> Trainings { get; set; }
 
-        public Training SelectedTraining
+        public List<Model.Type> Types { get; set; }
+
+        public Model.Type SelectedType
         {
-            get => selectedtraining;
+            get => selectedtype;
             set
             {
-                selectedtraining = value;
+                selectedtype = value;
                 Signal();
             }
         }
-
-        private void AddAthletePlz(object sender, RoutedEventArgs e)
-        {
-            AddAthlete addAthlete = new AddAthlete();
-            addAthlete.ShowDialog();
-
-        }
-
         private void AddTrainingPlz(object sender, RoutedEventArgs e)
         {
-            AddTraining addTraining = new AddTraining();
-            addTraining.ShowDialog();
+
         }
     }
 }
